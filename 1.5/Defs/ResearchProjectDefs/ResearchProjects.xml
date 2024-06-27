@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ResearchTabDef>
+    <defName>MethProductionTab</defName>
+    <label>Meth Lab</label>
+	<generalTitle>Lets cook meth 99.1% pure</generalTitle>
+	<generalDescription>You're a goddamn artist, this is art!</generalDescription>
+  </ResearchTabDef>
+
+  <ResearchProjectDef>
+    <defName>MethProduction</defName>
+    <label>Meth Production</label>
+    <techLevel>Industrial</techLevel>
+    <description>Produce raw meth.</description>
+    <baseCost>1000</baseCost>
+    <prerequisites>
+	  <li>DrugProduction</li>
+      <li>PsychiteRefining</li>
+    </prerequisites>
+    <researchViewX>0</researchViewX>
+    <researchViewY>0</researchViewY>
+	<tab>MethProductionTab</tab>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>MethCook</defName>
+    <label>Meth Coocking</label>
+    <techLevel>Industrial</techLevel>
+    <description>Lets go cook some pure meth.</description>
+    <baseCost>350</baseCost>
+    <prerequisites>
+	  <li>MethProduction</li>
+    </prerequisites>
+    <researchViewX>0.00</researchViewX>
+    <researchViewY>0.70</researchViewY>
+	<tab>MethProductionTab</tab>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef>
+    <defName>MethJoint</defName>
+    <label>Meth Joint</label>
+    <techLevel>Industrial</techLevel>
+    <description>Lets smoke pure meth.</description>
+    <baseCost>350</baseCost>
+    <prerequisites>
+	  <li>MethCook</li>
+    </prerequisites>
+    <researchViewX>0.00</researchViewX>
+    <researchViewY>1.50</researchViewY>
+	<tab>MethProductionTab</tab>
+  </ResearchProjectDef>
+  
+</Defs>

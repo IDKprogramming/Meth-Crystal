@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="MakeableDrugBase">
+    <defName>cMeth</defName>
+    <label>crystal meth</label>
+    <description>This is ART!</description>
+	<possessionCount>10</possessionCount>
+    <descriptionHyperlinks>
+	  <HediffDef>MethHigh</HediffDef>
+      <HediffDef>MethTolerance</HediffDef>
+      <HediffDef>MethAddiction</HediffDef>
+      <HediffDef>ChemicalDamageSevere</HediffDef>
+	  <HediffDef>HeartAttack</HediffDef>
+    </descriptionHyperlinks>
+    <graphicData>
+      <texPath>Things/cMeth</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <drawSize>0.75</drawSize>
+    </graphicData>
+    <rotatable>false</rotatable>
+    <statBases>
+      <WorkToMake>350</WorkToMake>
+      <MarketValue>50</MarketValue>
+      <Mass>0.05</Mass>
+    </statBases>
+    <techLevel>Industrial</techLevel>
+	<ingestible>
+	 <foodType>Processed</foodType>
+	 <joyKind>Chemical</joyKind>
+	 <joy>0.80</joy>
+	 <drugCategory>Hard</drugCategory>
+	 <baseIngestTicks>150</baseIngestTicks>
+	 <ingestSound>Ingest_Snort</ingestSound>
+      <ingestHoldOffsetStanding>
+        <northDefault>
+          <offset>(0.21,0,0.05)</offset>
+        </northDefault>
+      </ingestHoldOffsetStanding>
+	  <ingestHoldUsesTable>false</ingestHoldUsesTable>
+      <ingestCommandString>Snort {0}</ingestCommandString>
+      <ingestReportString>Snorting {0}.</ingestReportString>
+      <useEatingSpeedStat>false</useEatingSpeedStat>
+	    <outcomeDoers>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+        <hediffDef>MethHigh</hediffDef>
+        <severity>0.65</severity>
+        <toleranceChemical>Meth</toleranceChemical>
+        </li>
+        <li Class="IngestionOutcomeDoer_OffsetNeed">
+        <need>Rest</need>
+        <offset>1.0</offset>
+        <toleranceChemical>Meth</toleranceChemical>
+        </li>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>MethTolerance</hediffDef>
+          <toleranceChemical>Meth</toleranceChemical>
+          <severity>0.030</severity>
+          <divideByBodySize>true</divideByBodySize>
+          <multiplyByGeneToleranceFactors>true</multiplyByGeneToleranceFactors>
+        </li>
+      </outcomeDoers>
+	</ingestible>
+    <minRewardCount>10</minRewardCount>
+    <recipeMaker>
+      <researchPrerequisite>MethCook</researchPrerequisite>
+      <recipeUsers>
+        <li>DrugLab</li>
+      </recipeUsers>
+      <soundWorking>Recipe_Drug</soundWorking>
+      <displayPriority>1710</displayPriority>
+    </recipeMaker>
+    <costList>
+      <uMeth>2</uMeth>
+    </costList>
+	<comps>
+      <li Class="CompProperties_Drug">
+        <chemical>Meth</chemical>
+        <addictiveness>0.10</addictiveness>
+        <existingAddictionSeverityOffset>0.20</existingAddictionSeverityOffset>
+        <needLevelOffset>0.9</needLevelOffset>
+        <isCombatEnhancingDrug>true</isCombatEnhancingDrug>
+        <listOrder>101</listOrder>
+        <overdoseSeverityOffset>0.10~0.25</overdoseSeverityOffset>
+        <largeOverdoseChance>0.01</largeOverdoseChance>
+      </li>
+    </comps>
+    <allowedArchonexusCount>200</allowedArchonexusCount>
+  </ThingDef>
+  
+   <HediffDef>
+    <defName>MethHigh</defName>
+    <label>high on crystal meth</label>
+    <labelNoun>a crystal meth high</labelNoun>
+    <description>Active crystal meth in the bloodstream. Generates an intense euphoric high.</description>
+    <hediffClass>Hediff_High</hediffClass>
+    <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
+    <scenarioCanAdd>true</scenarioCanAdd>
+    <maxSeverity>1.0</maxSeverity>
+    <isBad>false</isBad>
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-2.4</severityPerDay>
+        <showHoursToRecover>true</showHoursToRecover>
+      </li>
+    </comps>
+      <stages>
+        <li>
+          <painFactor>0.6</painFactor>
+          <statFactors>
+            <RestFallRateFactor>0.66</RestFallRateFactor>
+          </statFactors>
+          <capMods>
+		    <li>
+              <capacity>Consciousness</capacity>
+              <offset>0.10</offset>
+            </li>
+            <li>
+              <capacity>Moving</capacity>
+              <offset>0.20</offset>
+            </li>
+          </capMods>
+		  <statOffsets>
+            <WorkSpeedGlobal>0.3</WorkSpeedGlobal>
+            <MeditationFocusGain MayRequire="Ludeon.RimWorld.Royalty">0.2</MeditationFocusGain>
+          </statOffsets>
+		  <hediffGivers>
+            <li Class="HediffGiver_Random">
+              <hediff>HeartAttack</hediff>
+              <mtbDays>120</mtbDays>
+              <partsToAffect>
+                <li>Heart</li>
+              </partsToAffect>
+            </li>
+          </hediffGivers>
+        </li>
+      </stages>
+   </HediffDef>
+   
+   <ThoughtDef>
+    <defName>MethHigh</defName>
+    <workerClass>ThoughtWorker_Hediff</workerClass>
+    <hediff>MethHigh</hediff>
+    <validWhileDespawned>true</validWhileDespawned>
+    <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <label>high on crystal meth</label>
+        <description>Feeling pumped! Let's cook more!</description>
+        <baseMoodEffect>40</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <!-- Meth addiction -->
+  
+  <ChemicalDef>
+    <defName>Meth</defName>
+    <label>meth</label>
+    <addictionHediff>MethAddiction</addictionHediff>
+    <toleranceHediff>MethTolerance</toleranceHediff>
+    <onGeneratedAddictedToleranceChance>0.9</onGeneratedAddictedToleranceChance>
+    <onGeneratedAddictedEvents>
+      <li>
+        <hediff>ChemicalDamageSevere</hediff>
+        <chance>0.20</chance>
+        <partsToAffect>
+          <li>Kidney</li>
+        </partsToAffect>
+      </li>
+    </onGeneratedAddictedEvents>
+    <geneToleranceBuildupFactorResist>0.3</geneToleranceBuildupFactorResist>
+    <geneToleranceBuildupFactorImmune>0</geneToleranceBuildupFactorImmune>
+    <geneOverdoseChanceFactorResist>0.3</geneOverdoseChanceFactorResist>
+    <geneOverdoseChanceFactorImmune>0</geneOverdoseChanceFactorImmune>
+  </ChemicalDef>
+  
+    <NeedDef ParentName="DrugAddictionNeedBase">
+    <defName>Chemical_Meth</defName>
+    <needClass>Need_Chemical</needClass>
+    <label>meth</label>
+    <description>Because of a meth addiction, this person needs to regularly consume the drug to avoid withdrawal symptoms.</description>
+    <listPriority>51</listPriority>
+  </NeedDef>
+  
+   <HediffDef ParentName="DrugToleranceBase">
+    <defName>MethTolerance</defName>
+    <label>meth tolerance</label>
+    <description>A built-up tolerance to meth. The more severe this tolerance is, the more meth-based drugs it takes to get the same effect.</description>
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.015</severityPerDay>
+      </li>
+      <li Class="HediffCompProperties_DrugEffectFactor">
+        <chemical>Meth</chemical>
+      </li>
+    </comps>
+    <hediffGivers>
+      <li Class="HediffGiver_RandomDrugEffect">
+        <hediff>ChemicalDamageSevere</hediff>
+        <severityToMtbDaysCurve>
+          <points>
+            <li>(0.45, 99999)</li>
+            <li>(0.5, 180)</li>
+            <li>(1, 135)</li>
+          </points>
+        </severityToMtbDaysCurve>
+        <partsToAffect>
+          <li>Kidney</li>
+        </partsToAffect>
+      </li>
+    </hediffGivers>
+  </HediffDef>
+  
+    <HediffDef ParentName="AddictionBase">
+    <defName>MethAddiction</defName>
+    <label>meth addiction</label>
+    <description>A chemical addiction to meth. Long-term presence of meth has caused neurological adaptations at the cellular level, so the brain can no longer function properly without the drug.
+\nWithout regular doses of meth, withdrawal symptoms will begin. However, extended abstinence will force the brain to adapt back to its normal state, resolving the addiction.</description>
+    <hediffClass>Hediff_Addiction</hediffClass>
+    <causesNeed>Chemical_Psychite</causesNeed>
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-0.0222</severityPerDay>
+        <showDaysToRecover>true</showDaysToRecover>
+      </li>
+    </comps>
+    <stages>
+      <li>
+      </li>
+      <li>
+        <label>withdrawal</label>
+        <socialFightChanceFactor>3.0</socialFightChanceFactor>
+        <statOffsets>
+          <RestFallRateFactor>0.3</RestFallRateFactor>
+        </statOffsets>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.30</offset>
+          </li>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>-0.30</offset>
+          </li>
+          <li>
+            <capacity>Manipulation</capacity>
+            <offset>-0.30</offset>
+          </li>
+        </capMods>
+        <mentalStateGivers>
+          <li>
+            <mentalState>Binging_DrugExtreme</mentalState>
+            <mtbDays>40</mtbDays>
+          </li>
+          <li>
+            <mentalState>Wander_Psychotic</mentalState>
+            <mtbDays>10</mtbDays>
+          </li>
+        </mentalStateGivers>
+      </li>
+    </stages>
+  </HediffDef>
+  
+   <ThoughtDef>
+    <defName>MethWithdrawal</defName>
+    <workerClass>ThoughtWorker_Hediff</workerClass>
+    <hediff>MethAddiction</hediff>
+    <validWhileDespawned>true</validWhileDespawned>
+    <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <visible>false</visible>
+      </li>
+      <li>
+        <label>meth withdrawal</label>
+        <description>God I'm tired. Everything's so slow and boring. Especially me.</description>
+        <baseMoodEffect>-40</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+</Defs>

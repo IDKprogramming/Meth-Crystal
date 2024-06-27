@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="MakeableDrugBase">
+    <defName>uMeth</defName>
+    <label>raw meth</label>
+    <description>Jesse we need to cook.</description>
+	<possessionCount>10</possessionCount>
+    <graphicData>
+      <texPath>Things/uMeth</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <drawSize>0.75</drawSize>
+    </graphicData>
+    <rotatable>false</rotatable>
+    <statBases>
+      <WorkToMake>350</WorkToMake>
+      <MarketValue>42</MarketValue>
+      <Mass>0.15</Mass>
+    </statBases>
+    <techLevel>Industrial</techLevel>
+	<ingestible />
+    <minRewardCount>10</minRewardCount>
+    <recipeMaker>
+      <researchPrerequisite>MethProduction</researchPrerequisite>
+      <recipeUsers>
+        <li>DrugLab</li>
+      </recipeUsers>
+      <soundWorking>Recipe_Drug</soundWorking>
+      <displayPriority>1705</displayPriority>
+    </recipeMaker>
+    <costList>
+      <Yayo>2</Yayo>
+    </costList>
+    <allowedArchonexusCount>200</allowedArchonexusCount>
+  </ThingDef>
+  
+</Defs>

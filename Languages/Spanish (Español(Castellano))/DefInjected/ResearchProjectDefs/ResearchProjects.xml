@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+<MethCook.label>Cocción de Cristal</MethCook.label>
+<MethCook.description>Vamos a cocinar algunos cristales puros.</MethCook.description>
+
+<MethProductionTab.label>Laboratorio de Cristal</MethProductionTab.label>
+<MethProductionTab.generalTitle>Vamos a cocinar cristal 99.1% puro</MethProductionTab.generalTitle>
+<MethProductionTab.generalDescription>Eres un artista, ¡esto es pura arte!</MethProductionTab.generalDescription>
+
+<MethProduction.label>Producción de Cristal</MethProduction.label>
+<MethProduction.description>Produce cristal crudo.</MethProduction.description>
+
+</LanguageData>

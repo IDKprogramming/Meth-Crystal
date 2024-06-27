@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="MakeableDrugBase">
+    <defName>sMeth</defName>
+    <label>meth joint</label>
+    <description>Smoking every day</description>
+	<possessionCount>10</possessionCount>
+    <descriptionHyperlinks>
+	  <HediffDef>sMethHigh</HediffDef>
+      <HediffDef>MethTolerance</HediffDef>
+      <HediffDef>MethAddiction</HediffDef>
+      <HediffDef>ChemicalDamageSevere</HediffDef>
+	  <HediffDef>HeartAttack</HediffDef>
+    </descriptionHyperlinks>
+    <graphicData>
+      <texPath>Things/sMeth</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+      <drawSize>0.75</drawSize>
+    </graphicData>
+    <rotatable>false</rotatable>
+    <statBases>
+      <WorkToMake>350</WorkToMake>
+      <MarketValue>50</MarketValue>
+      <Mass>0.05</Mass>
+    </statBases>
+    <techLevel>Industrial</techLevel>
+	<ingestible>
+	 <foodType>Processed</foodType>
+	 <joyKind>Chemical</joyKind>
+	 <joy>0.60</joy>
+	 <drugCategory>Hard</drugCategory>
+	 <baseIngestTicks>150</baseIngestTicks>
+	 <ingestSound>Ingest_Smoke</ingestSound>
+      <ingestHoldOffsetStanding>
+        <northDefault>
+          <offset>(0.21,0,0.05)</offset>
+        </northDefault>
+      </ingestHoldOffsetStanding>
+	  <ingestHoldUsesTable>false</ingestHoldUsesTable>
+      <ingestCommandString>Smoke {0}</ingestCommandString>
+      <ingestReportString>Smoking {0}.</ingestReportString>
+      <useEatingSpeedStat>false</useEatingSpeedStat>
+	    <outcomeDoers>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+        <hediffDef>sMethHigh</hediffDef>
+        <severity>0.50</severity>
+        <toleranceChemical>Meth</toleranceChemical>
+        </li>
+        <li Class="IngestionOutcomeDoer_OffsetNeed">
+        <need>Rest</need>
+        <offset>1.0</offset>
+        <toleranceChemical>Meth</toleranceChemical>
+        </li>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>MethTolerance</hediffDef>
+          <toleranceChemical>Meth</toleranceChemical>
+          <severity>0.030</severity>
+          <divideByBodySize>true</divideByBodySize>
+          <multiplyByGeneToleranceFactors>true</multiplyByGeneToleranceFactors>
+        </li>
+      </outcomeDoers>
+	</ingestible>
+    <minRewardCount>10</minRewardCount>
+    <recipeMaker>
+      <researchPrerequisite>MethJoint</researchPrerequisite>
+      <recipeUsers>
+        <li>DrugLab</li>
+      </recipeUsers>
+      <soundWorking>Recipe_Drug</soundWorking>
+      <displayPriority>1720</displayPriority>
+    </recipeMaker>
+    <costList>
+      <uMeth>2</uMeth>
+    </costList>
+	<comps>
+      <li Class="CompProperties_Drug">
+        <chemical>Meth</chemical>
+        <addictiveness>0.08</addictiveness>
+        <existingAddictionSeverityOffset>0.20</existingAddictionSeverityOffset>
+        <needLevelOffset>0.9</needLevelOffset>
+        <isCombatEnhancingDrug>true</isCombatEnhancingDrug>
+        <listOrder>102</listOrder>
+        <overdoseSeverityOffset>0.10~0.20</overdoseSeverityOffset>
+        <largeOverdoseChance>0.01</largeOverdoseChance>
+      </li>
+    </comps>
+    <allowedArchonexusCount>200</allowedArchonexusCount>
+  </ThingDef>
+  
+   <HediffDef>
+    <defName>sMethHigh</defName>
+    <label>high on meth joint</label>
+    <labelNoun>a meth joint high</labelNoun>
+    <description>Active meth joint in the bloodstream. Generates an intense euphoric high.</description>
+    <hediffClass>Hediff_High</hediffClass>
+    <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
+    <scenarioCanAdd>true</scenarioCanAdd>
+    <maxSeverity>1.0</maxSeverity>
+    <isBad>false</isBad>
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-2.0</severityPerDay>
+        <showHoursToRecover>true</showHoursToRecover>
+      </li>
+    </comps>
+      <stages>
+        <li>
+          <painFactor>0.6</painFactor>
+          <statFactors>
+            <RestFallRateFactor>0.66</RestFallRateFactor>
+          </statFactors>
+          <capMods>
+		    <li>
+              <capacity>Consciousness</capacity>
+              <offset>0.08</offset>
+            </li>
+            <li>
+              <capacity>Moving</capacity>
+              <offset>0.15</offset>
+            </li>
+          </capMods>
+		  <statOffsets>
+            <WorkSpeedGlobal>0.3</WorkSpeedGlobal>
+            <MeditationFocusGain MayRequire="Ludeon.RimWorld.Royalty">0.2</MeditationFocusGain>
+          </statOffsets>
+		  <hediffGivers>
+            <li Class="HediffGiver_Random">
+              <hediff>HeartAttack</hediff>
+              <mtbDays>120</mtbDays>
+              <partsToAffect>
+                <li>Heart</li>
+              </partsToAffect>
+            </li>
+          </hediffGivers>
+        </li>
+      </stages>
+   </HediffDef>
+   
+   <ThoughtDef>
+    <defName>sMethHigh</defName>
+    <workerClass>ThoughtWorker_Hediff</workerClass>
+    <hediff>sMethHigh</hediff>
+    <validWhileDespawned>true</validWhileDespawned>
+    <developmentalStageFilter>Baby, Child, Adult</developmentalStageFilter>
+    <stages>
+      <li>
+        <label>high on meth joint</label>
+        <description>Feeling pumped! Let's cook more!</description>
+        <baseMoodEffect>30</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+</Defs>

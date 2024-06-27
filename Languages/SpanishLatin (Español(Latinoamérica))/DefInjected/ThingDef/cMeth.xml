@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+<cMeth.label>Cristal cocido</cMeth.label>
+<cMeth.description>¡Esto es ARTE!</cMeth.description>
+<cMeth.ingestible.ingestCommandString>Inhalar {0}</cMeth.ingestible.ingestCommandString>
+<cMeth.ingestible.ingestReportString>Inhalando {0}.</cMeth.ingestible.ingestReportString>
+
+
+<MethHigh.label>Viajando en el cristal</MethHigh.label>
+<MethHigh.labelNoun>Un viaje en el cristal</MethHigh.labelNoun>
+<MethHigh.description>El cristal está en el sistema sanguíneo, generando euforia.</MethHigh.description>
+
+</LanguageData>
